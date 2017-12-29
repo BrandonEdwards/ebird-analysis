@@ -38,15 +38,28 @@ source("src/plot-recipes.R")
 
 data <- read.csv(inputFile)
 
-# Add Month and Year field
-data$Month <- substr(data$Date,0,2)
-data$Year <- substr(data$Date,7,10)
+# Add Day, Month, and Year field
+data$Day <- substr(data$Date, 4, 5)
+data$Month <- substr(data$Date, 0, 2)
+data$Year <- substr(data$Date, 7, 10)
 
 # Replace NA with 0
 data[is.na(data)] <- 0
 
-p <- plotNumChecklists(getNumChecklists(data))
+#####################################
+# Analyze Effort Data
+#####################################
+
+# Yearly checklists
+p <- plotYearlyNumChecklists(getNumYearlyChecklists(data))
   
-png("test.png", width = 10.5, height = 4, units = "in", res = 300)
+png("yearlyNumChecklists.png", width = 10.5, height = 4, units = "in", res = 300)
+print(p)
+dev.off()
+
+# Monthly Checklists for 2017
+p <- plotMonthlyNumChecklists(getNumMonthlyChecklists(data, analysisYear), analysisYear)
+
+png("monthlyNumChecklists.png", width = 10.5, height = 4, units = "in", res = 300)
 print(p)
 dev.off()
