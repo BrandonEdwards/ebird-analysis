@@ -6,6 +6,59 @@
 # Last Updated December 2017
 #####################################
 
+getCumulativeChecklists <- function(data, analysisYear)
+{
+  data <- data[ which(data$Year == analysisYear), ]
+  
+  dates <- seq(as.Date("2017-01-01"), as.Date("2017-12-31"), by="+1 day")
+  totalChecklists <- NULL
+  previousTotal <- 0
+  completeChecklists <- NULL
+  complete <- 0
+  targetChecklists <- seq(from = 1, to = 365, by = 1)
+  
+  for (date in dates)
+  {
+    temp <- data[ which(data$Date == date), ]
+    previousTotal <- previousTotal + length(unique(temp$Submission.ID))
+    totalChecklists <- c(totalChecklists, previousTotal)
+    
+    for (id in unique(temp$Submission.ID))
+    {
+      listData <- temp[ which(temp$Submission.ID == id), ]
+      if ('X' %in% listData$Count)
+      {
+        next
+      }
+      else if (listData$Protocol[1] == "eBird - Casual Observation")
+      {
+        next
+      }
+      else if (listData$Protocol[1] == "PriMig - Pri Mig Banding Protocol")
+      {
+        next
+      }
+      else
+      {
+        complete <- complete + 1
+      }
+    }
+    
+    completeChecklists <- c(completeChecklists, complete)
+  }
+  
+  numChecklists <- cbind(as.Date(dates), targetChecklists, completeChecklists, totalChecklists)
+  numChecklists <- data.frame(numChecklists)
+  names(numChecklists) <- c("Date", "Target", "Complete.Checklists", "Total.Checklists")
+  
+  numChecklists$Date <- factor(numChecklists$Date, as.Date(dates))
+  numChecklists <- melt(numChecklists, id.vars = "Date")
+  #numChecklists$value <- as.numeric(as.character(numChecklists$value))
+  
+  return(numChecklists)
+  
+}
+
 getNumYearlyChecklists <- function(data)
 {
   years <- sort(unique(data$Year))
