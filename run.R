@@ -25,12 +25,16 @@ inputFile <- "MyEBirdData.csv"
 
 # install.packages("ggplot2")
 # install.packages("reshape")
+# install.packages("stringr")
 
 library(ggplot2)
 library(reshape)
+library(stringr)
 
 source("src/effort-functions.R")
+source("src/location-functions.R")
 source("src/plot-recipes.R")
+source("src/helper.R")
 
 #####################################
 # Read Data
@@ -55,18 +59,34 @@ data[is.na(data)] <- 0
 
 # Yearly checklists
 p <- plotYearlyNumChecklists(getNumYearlyChecklists(data))
-png("yearlyNumChecklists.png", width = 10.5, height = 4, units = "in", res = 300)
+png("output/effort/yearlyNumChecklists.png", width = 10.5, height = 4, units = "in", res = 300)
 print(p)
 dev.off()
 
 # Monthly Checklists for 2017
 p <- plotMonthlyNumChecklists(getNumMonthlyChecklists(data, analysisYear), analysisYear)
-png("monthlyNumChecklists.png", width = 10.5, height = 4, units = "in", res = 300)
+png("output/effort/monthlyNumChecklists.png", width = 10.5, height = 4, units = "in", res = 300)
 print(p)
 dev.off()
 
 # Cumulative Checklists for 2017
 p <- plotCumulativeChecklists(getCumulativeChecklists(data, analysisYear), analysisYear)
-png("monthlyCumulativeChecklists.png", width = 10.5, height = 4, units = "in", res = 300)
+png("output/effort/monthlyCumulativeChecklists.png", width = 10.5, height = 4, units = "in", res = 300)
+print(p)
+dev.off()
+
+#####################################
+# Analyze Location Data
+#####################################
+
+# Total Yearly Counties
+p <- plotYearlyNumCounties(getYearlyTotalCounties(data))
+png("output/location/yearlyNumCounties.png", width = 10.5, height = 4, units = "in", res = 300)
+print(p)
+dev.off()
+
+# Top 10 Counties
+p <- plotTopTenCounties(getTopTenCounties(data, analysisYear), analysisYear)
+png("output/location/topTenCounties.png", width = 10.5, height = 4, units = "in", res = 300)
 print(p)
 dev.off()
