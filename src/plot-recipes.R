@@ -6,6 +6,9 @@
 # Last Updated December 2017
 #####################################
 
+#####################################
+# Effort Plots
+#####################################
 plotCumulativeChecklists <- function(numChecklists, analysisYear)
 {
   return(ggplot(numChecklists,
@@ -73,4 +76,46 @@ plotMonthlyNumChecklists <- function(numChecklists, analysisYear)
                  axis.line = element_line(colour = "black")) +
            labs(title = paste("Total Checklists by Month: ", analysisYear), x = "Month", y = "Number of Checklists") +
            scale_fill_manual(name = "Checklist Type", values=c("#E69F00", "#56B4E9"), labels = c("Complete", "Total")))
+}
+
+#####################################
+# Location Plots
+#####################################
+
+plotYearlyNumCounties <- function(numCounties)
+{
+  return(ggplot(numCounties, 
+                aes(Year, Total.Counties)) +
+           geom_bar(stat = "identity", fill = "#56B4E9") +
+           geom_text(aes(label = Total.Counties),
+                     vjust = -0.1) +
+           theme(plot.title = element_text(size = 20), 
+                 axis.title = element_text(size = 15),
+                 axis.text = element_text(size = 12), 
+                 legend.title = element_text(size = 15), 
+                 legend.text = element_text(size = 12), 
+                 panel.grid.major = element_blank(), 
+                 panel.grid.minor = element_blank(), 
+                 panel.background = element_blank(), 
+                 axis.line = element_line(colour = "black")) +
+           labs(title = "Total Counties Birded by Year", x = "Year", y = "Number of Counties"))  
+}
+
+plotTopTenCounties <- function(topTen, analysisYear)
+{
+  return(ggplot(topTen, 
+                aes(County, Total)) +
+           geom_bar(stat = "identity", fill = "#56B4E9") +
+           geom_text(aes(label = Total),
+                     vjust = -0.1) +
+           theme(plot.title = element_text(size = 20), 
+                 axis.title = element_text(size = 15),
+                 axis.text = element_text(size = 12), 
+                 legend.title = element_text(size = 15), 
+                 legend.text = element_text(size = 12), 
+                 panel.grid.major = element_blank(), 
+                 panel.grid.minor = element_blank(), 
+                 panel.background = element_blank(), 
+                 axis.line = element_line(colour = "black")) +
+           labs(title = paste("Top 10 Counties: ", analysisYear), x = "County", y = "Total Species"))    
 }
