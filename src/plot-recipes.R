@@ -6,6 +6,29 @@
 # Last Updated December 2017
 #####################################
 
+plotCumulativeChecklists <- function(numChecklists, analysisYear)
+{
+  return(ggplot(numChecklists,
+                aes(x = as.Date(Date), value)) + 
+           geom_line(aes(group = variable, colour = variable), size = 1) +
+           scale_x_date(date_breaks = "1 month",
+                        date_labels = "%b",
+                        limits = as.Date(c('2017-01-01','2017-12-31'))) +
+           theme(plot.title = element_text(size = 20), 
+                 axis.title = element_text(size = 15),
+                 axis.text = element_text(size = 12), 
+                 legend.title = element_text(size = 15), 
+                 legend.text = element_text(size = 12), 
+                 panel.grid.major = element_blank(), 
+                 panel.grid.minor = element_blank(), 
+                 panel.background = element_blank(), 
+                 axis.line = element_line(colour = "black")) +
+           labs(title = paste("Cumulative Checklists: ", analysisYear), x = "Month", y = "Number of Checklists") +
+           scale_color_manual(name = "Checklist Type", 
+                              values=c("#000000", "#E69F00", "#56B4E9"), 
+                              labels = c("Target", "Complete", "Total")))
+}
+
 plotYearlyNumChecklists <- function(numChecklists)
 {
   return(ggplot(numChecklists, 
