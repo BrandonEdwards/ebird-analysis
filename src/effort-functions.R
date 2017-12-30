@@ -10,7 +10,7 @@ getCumulativeChecklists <- function(data, analysisYear)
 {
   data <- data[ which(data$Year == analysisYear), ]
   
-  dates <- seq(as.Date("2017-01-01"), as.Date("2017-12-31"), by="+1 day")
+  dates <- seq(as.Date(paste(analysisYear, "-01-01", sep = "")), as.Date(paste(analysisYear, "-12-31", sep = "")), by="+1 day")
   totalChecklists <- NULL
   previousTotal <- 0
   completeChecklists <- NULL

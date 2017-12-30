@@ -15,8 +15,7 @@ plotCumulativeChecklists <- function(numChecklists, analysisYear)
                 aes(x = as.Date(Date), value)) + 
            geom_line(aes(group = variable, colour = variable), size = 1) +
            scale_x_date(date_breaks = "1 month",
-                        date_labels = "%b",
-                        limits = as.Date(c('2017-01-01','2017-12-31'))) +
+                        date_labels = "%b") +
            theme(plot.title = element_text(size = 20), 
                  axis.title = element_text(size = 15),
                  axis.text = element_text(size = 12), 
