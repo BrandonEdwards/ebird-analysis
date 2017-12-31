@@ -35,6 +35,7 @@ source("src/effort-functions.R")
 source("src/location-functions.R")
 source("src/plot-recipes.R")
 source("src/total-birds-functions.R")
+source("src/life-birds-functions.R")
 source("src/helper.R")
 
 #####################################
@@ -113,6 +114,28 @@ dev.off()
 
 # Cumulative Year Species
 p <- plotCumulativeYearSpecies(getCumulativeSpecies(data.sp, analysisYear), analysisYear)
-png("output/total/cumulativepecies.png", width = 10.5, height = 4, units = "in", res = 300)
+png("output/total/cumulativeSpecies.png", width = 10.5, height = 4, units = "in", res = 300)
+print(p)
+dev.off()
+
+#####################################
+# Analyze Life Birds Data
+#####################################
+
+# Cumulative Life Species
+p <- plotCumulativeLifeSpecies(getCumulativeLifeSpecies(data.sp, analysisYear), analysisYear)
+png("output/life/cumulativeLifeSpecies.png", width = 10.5, height = 4, units = "in", res = 300)
+print(p)
+dev.off()
+
+#Yearly Life Species
+p <- plotYearlyLifeSpecies(getYearlyLifeSpecies(data.sp))
+png("output/life/yearlyLifeSpecies.png", width = 10.5, height = 4, units = "in", res = 300)
+print(p)
+dev.off()
+
+#Yearly Available Life Species
+p <- plotYearlyAvailableLifeSpecies(getYearlyAvailableLifeSpecies(data.sp))
+png("output/life/yearlyAvailableLifeSpecies.png", width = 10.5, height = 4, units = "in", res = 300)
 print(p)
 dev.off()
