@@ -34,6 +34,7 @@ library(stringr)
 source("src/effort-functions.R")
 source("src/location-functions.R")
 source("src/plot-recipes.R")
+source("src/total-birds-functions.R")
 source("src/helper.R")
 
 #####################################
@@ -88,5 +89,30 @@ dev.off()
 # Top 10 Counties
 p <- plotTopTenCounties(getTopTenCounties(data, analysisYear), analysisYear)
 png("output/location/topTenCounties.png", width = 10.5, height = 4, units = "in", res = 300)
+print(p)
+dev.off()
+
+#####################################
+# Analyze Total Species Data
+#####################################
+
+#From here on in, we will want data only at the species level
+data.sp <- removeNonSpecies(data)
+
+# Total Yearly Species
+p <- plotYearlyTotalSpecies(getNumYearlySpecies(data.sp))
+png("output/total/yearlyNumSpecies.png", width = 10.5, height = 4, units = "in", res = 300)
+print(p)
+dev.off()
+
+# Total Monthly Species
+p <- plotMonthlyTotalSpecies(getNumMonthlySpecies(data.sp, analysisYear), analysisYear)
+png("output/total/monthlyNumSpecies.png", width = 10.5, height = 4, units = "in", res = 300)
+print(p)
+dev.off()
+
+# Cumulative Year Species
+p <- plotCumulativeYearSpecies(getCumulativeSpecies(data.sp, analysisYear), analysisYear)
+png("output/total/cumulativepecies.png", width = 10.5, height = 4, units = "in", res = 300)
 print(p)
 dev.off()

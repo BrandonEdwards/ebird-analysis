@@ -118,3 +118,67 @@ plotTopTenCounties <- function(topTen, analysisYear)
                  axis.line = element_line(colour = "black")) +
            labs(title = paste("Top 10 Counties: ", analysisYear), x = "County", y = "Total Species"))    
 }
+
+#####################################
+# Total Birds Plots
+#####################################
+
+plotCumulativeYearSpecies <- function(numSpecies, analysisYear)
+{
+  return(ggplot(numSpecies,
+                aes(x = as.Date(Date), Total)) + 
+           geom_line(size = 1, colour = "#56B4E9") +
+           scale_x_date(date_breaks = "1 month",
+                        date_labels = "%b") +
+           theme(plot.title = element_text(size = 20), 
+                 axis.title = element_text(size = 15),
+                 axis.text = element_text(size = 12), 
+                 legend.title = element_text(size = 15), 
+                 legend.text = element_text(size = 12), 
+                 panel.grid.major = element_blank(), 
+                 panel.grid.minor = element_blank(), 
+                 panel.background = element_blank(), 
+                 axis.line = element_line(colour = "black")) +
+           labs(title = paste("Cumulative Species: ", analysisYear), x = "Month", y = "Number of Species") +
+           scale_color_manual(name = "Checklist Type", 
+                              values=c("#56B4E9"), 
+                              labels = c("Total")))
+}
+
+plotYearlyTotalSpecies <- function(numSpecies)
+{
+  return(ggplot(numSpecies, 
+                aes(Year, Total)) +
+           geom_bar(stat = "identity", fill = "#56B4E9") +
+           geom_text(aes(label = Total),
+                     vjust = -0.1) +
+           theme(plot.title = element_text(size = 20), 
+                 axis.title = element_text(size = 15),
+                 axis.text = element_text(size = 12), 
+                 legend.title = element_text(size = 15), 
+                 legend.text = element_text(size = 12), 
+                 panel.grid.major = element_blank(), 
+                 panel.grid.minor = element_blank(), 
+                 panel.background = element_blank(), 
+                 axis.line = element_line(colour = "black")) +
+           labs(title = "Total Species by Year", x = "Year", y = "Number of Species"))  
+}
+
+plotMonthlyTotalSpecies <- function(numSpecies, analysisYear)
+{
+  return(ggplot(numSpecies, 
+                aes(Month, Total)) +
+           geom_bar(stat = "identity", fill = "#56B4E9") +
+           geom_text(aes(label = Total),
+                     vjust = -0.1) +
+           theme(plot.title = element_text(size = 20), 
+                 axis.title = element_text(size = 15),
+                 axis.text = element_text(size = 12), 
+                 legend.title = element_text(size = 15), 
+                 legend.text = element_text(size = 12), 
+                 panel.grid.major = element_blank(), 
+                 panel.grid.minor = element_blank(), 
+                 panel.background = element_blank(), 
+                 axis.line = element_line(colour = "black")) +
+           labs(title = paste("Total Species by Month: ", analysisYear), x = "Month", y = "Number of Species"))  
+}
