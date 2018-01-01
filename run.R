@@ -39,6 +39,16 @@ source("src/life-birds-functions.R")
 source("src/helper.R")
 
 #####################################
+# Create Output Directories
+#####################################
+
+dir.create("output")
+dir.create("output/effort")
+dir.create("output/life")
+dir.create("output/location")
+dir.create("output/total")
+
+#####################################
 # Read Data
 #####################################
 
