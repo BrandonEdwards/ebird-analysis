@@ -1,9 +1,9 @@
 #####################################
 # Brandon Edwards
 # ebird-analysis
-# run.R
+# generate-plots.R
 # Created December 2017
-# Last Updated December 2017
+# Last Updated January 2018
 #####################################
 
 #####################################
@@ -16,7 +16,7 @@ remove(list = ls())
 # Set Constants
 #####################################
 
-analysisYear <- 2017
+analysisYear <- 2018
 inputFile <- "MyEBirdData.csv"
 
 #####################################
@@ -31,11 +31,11 @@ library(ggplot2)
 library(reshape)
 library(stringr)
 
-source("src/effort-functions.R")
-source("src/location-functions.R")
-source("src/plot-recipes.R")
-source("src/total-birds-functions.R")
-source("src/life-birds-functions.R")
+source("src/plot/effort-functions.R")
+source("src/plot/location-functions.R")
+source("src/plot/plot-recipes.R")
+source("src/plot/total-birds-functions.R")
+source("src/plot/life-birds-functions.R")
 source("src/helper.R")
 
 #####################################
