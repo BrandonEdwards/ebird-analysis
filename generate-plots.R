@@ -54,16 +54,8 @@ dir.create("output/total")
 
 data <- read.csv(inputFile)
 
-# Add Day, Month, and Year field
-data$Day <- substr(data$Date, 4, 5)
-data$Month <- substr(data$Date, 0, 2)
-data$Year <- substr(data$Date, 7, 10)
-
-# Change date format
-data$Date <- as.Date(paste(data$Year, "-", data$Month, "-", data$Day, sep=""))
-
-# Replace NA with 0
-data[is.na(data)] <- 0
+# Fix some date issues and deal with NAs
+data <- cleanData(data)
 
 #####################################
 # Analyze Effort Data
